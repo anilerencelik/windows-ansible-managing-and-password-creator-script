@@ -14,20 +14,21 @@ getEc2Details () {
 writeAnsibleInventory () {
     rm -rf $WDIRECTORY/inventoryAutomation.yml
     uzunluk=$(cat $WDIRECTORY/automata_ec2ids | wc -l )
+
+    echo "[nodes:vars]
+ansible_user=Administrator
+ansible_port=5986
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+
+[nodes]" >> $WDIRECTORY/inventoryAutomation.yml
     for (( c=1; c<=uzunluk; c++ ))
     do  
         id=$(head -n $c $WDIRECTORY/automata_ec2ids | tail -n 1 )
         name=$(head -n $c $WDIRECTORY/automata_ec2names | tail -n 1 )
         ip=$(head -n $c $WDIRECTORY/automata_ec2ips | tail -n 1 )
-        echo "
-[$name]
-$ip
-[$name:vars]
-ansible_user=Administrator
-ansible_port=5986
-ansible_connection=winrm
-ansible_winrm_server_cert_validation=ignore" >> $WDIRECTORY/inventoryAutomation.yml
-        echo "ansible_password="$(getPassword $id) >> $WDIRECTORY/inventoryAutomation.yml
+        echo "#$name">> $WDIRECTORY/inventoryAutomation.yml
+        echo "$ip ansible_password="$(getPassword $id) >> $WDIRECTORY/inventoryAutomation.yml
     done
     rm -rf $WDIRECTORY/automata_ec2infos $WDIRECTORY/automata_ec2ids $WDIRECTORY/automata_ec2names $WDIRECTORY/automata_ec2ips
 }

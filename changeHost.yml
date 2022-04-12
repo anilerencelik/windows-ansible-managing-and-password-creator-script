@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: nodes
   gather_facts: true
   tasks:
   - name: Adding 192.100.100.100 mapping for test.com
