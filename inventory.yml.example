@@ -1,0 +1,9 @@
+[vms]
+10.230.6.186
+
+[vms:vars]
+ansible_user=Administrator
+ansible_password=RE4LY,S3CR3T,pasSSw0rd
+ansible_port=5986
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore

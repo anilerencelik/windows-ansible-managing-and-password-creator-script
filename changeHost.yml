@@ -1,0 +1,8 @@
+- hosts: all
+  gather_facts: true
+  tasks:
+  - name: Adding 192.100.100.100 mapping for test.com
+    win_hosts:
+      state: present
+      canonical_name: test.com
+      ip_address: 192.100.100.100

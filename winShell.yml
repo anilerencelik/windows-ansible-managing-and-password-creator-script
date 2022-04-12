@@ -1,0 +1,7 @@
+- hosts: all
+  gather_facts: true
+  tasks:
+  - name: Adding 192.100.100.100 mapping for test.com
+    ansible.windows.win_powershell:
+        script: |
+          echo "Hello World"

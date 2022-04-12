@@ -1,0 +1,9 @@
+---
+
+- name: Run basic PowerShell script
+  hosts: all
+  tasks: 
+    - name: Print Hello
+      ansible.windows.win_powershell:
+        script: |
+          echo "Hello World"
